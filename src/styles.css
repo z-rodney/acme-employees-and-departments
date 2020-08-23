@@ -1,0 +1,18 @@
+body {
+  box-sizing: border-box;
+}
+
+.dept-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+}
+
+.col {
+  border-right: 1px solid black;
+  padding: 1rem;
+}
+
+.col h2 {
+  text-align: center;
+}

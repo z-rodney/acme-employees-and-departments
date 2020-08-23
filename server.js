@@ -22,7 +22,9 @@ app.get('/api/employees', async (req, res, next) => {
 });
 
 app.get('/api/departments', async (req, res, next) => {
-  const departments = await Department.findAll();
+  const departments = await Department.findAll({
+    include: { model: Employee}
+  });
   res.send(departments);
 })
 
