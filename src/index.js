@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
+import DepartmentList from './departmentList'
 
 class DepartmentColumn extends React.Component {
   constructor(){
@@ -30,23 +31,9 @@ class DepartmentColumn extends React.Component {
 
   render(){
     const stateObj = this.state;
-    console.log('rendered');
+    console.log('rendered', stateObj);
     return ( <div className='dept-container'>
-       { this.state.departments.map(dept => {
-            return (
-              <div key={dept.id} className={`col dept-${dept.id}`}>
-                <h2>{dept.name}</h2>
-                <ul>{dept.employees.map(emp => {
-                  return (<li key={emp.id}>{emp.name}
-                  <p> <button>Fire</button>
-                  <button>Remove from Dept</button>
-                  </p>
-                  </li>)
-                })}</ul>
-              </div>
-            )
-          })
-      }
+       <DepartmentList departments={stateObj.departments}/>
     </div>)
   }
 }

@@ -16,3 +16,16 @@ body {
 .col h2 {
   text-align: center;
 }
+
+button {
+  border: 1px solid black;
+  box-shadow: none;
+}
+
+.fire {
+  background: rgb(168, 2, 2);
+}
+
+.remove {
+  background: gray;
+}

@@ -1,15 +1,14 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 
-const employeeList = (props) => {
-  return props.map(emp => {
-    <div key={emp.id}>
-      <h3>{emp.name}</h3>
-      <button>Fire</button>
-      <button>Remove from Dept</button>
-    </div>
+const EmployeeList = (props) => {
+  return props.people.map(person => {
+    return (<div key={person.id}>
+      <p>{person.name}</p>
+      <button className="fire">Fire</button>
+      <button className="remove">X Remove from Dept</button>
+    </div>)
     }
   )
 }
 
-export default employeeList
+export default EmployeeList
