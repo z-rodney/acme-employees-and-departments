@@ -28,18 +28,20 @@ app.get('/api/departments', async (req, res, next) => {
   res.send(departments);
 })
 
-app.delete('api/employees/:id', async (req, res, next) => {
-  await Friend.destroy({ where: {
+app.delete('/api/employees/:id', async (req, res, next) => {
+  await Employee.destroy({ where: {
     id: req.params.id
   }});
-  res.sendStatus(204)
+  res.send('ok')
 })
 
-app.put('api/employees/:id', async (req, res, next) => {
-  const emp = await Friend.findOne({where: {
+app.put('/api/employees/:id', async (req, res, next) => {
+  const emp = await Employee.findOne({where: {
     id: req.params.id
   }})
   await emp.setDepartment(null);
+  const employees = await Employee.findAll();
+  res.send(employees);
 })
 
 

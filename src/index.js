@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 import DepartmentList from './departmentList'
 
-class DepartmentColumn extends React.Component {
+class Main extends React.Component {
   constructor(){
     super(),
     this.state = {
@@ -17,11 +17,16 @@ class DepartmentColumn extends React.Component {
       axios.get('/api/departments'),
       axios.get('/api/employees')
     ]);
+
     const [depts, emps] = await Promise.all([
       deptRes.data,
       empRes.data
     ]);
-    console.log(depts, emps);
+
+    depts.unshift({id: 0,
+      employees: emps.filter(emp => emp.departmentId === null)
+    })
+
     this.setState({
       departments: depts,
       employees: emps
@@ -30,12 +35,11 @@ class DepartmentColumn extends React.Component {
   }
 
   render(){
-    const stateObj = this.state;
-    console.log('rendered', stateObj);
     return ( <div className='dept-container'>
-       <DepartmentList departments={stateObj.departments}/>
+       <DepartmentList departments={this.state.departments}/>
     </div>)
   }
+  //TODO: re-render components on click
 }
 
-ReactDOM.render(<DepartmentColumn/>, document.querySelector('#root'));
+ReactDOM.render(<Main/>, document.querySelector('#root'));
