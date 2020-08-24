@@ -12,23 +12,37 @@ class DepartmentColumn extends React.Component {
   }
 
   async componentDidMount(){
-    const res = await axios.get('/api/departments');
-    const depts = await res.data;
-    console.log(depts);
+    const [deptRes, empRes] = await Promise.all([
+      axios.get('/api/departments'),
+      axios.get('/api/employees')
+    ]);
+    const [depts, emps] = await Promise.all([
+      deptRes.data,
+      empRes.data
+    ]);
+    console.log(depts, emps);
     this.setState({
-      departments: depts
+      departments: depts,
+      employees: emps
     });
 
   }
 
   render(){
+    const stateObj = this.state;
     console.log('rendered');
     return ( <div className='dept-container'>
-      { this.state.departments.map(dept => {
+       { this.state.departments.map(dept => {
             return (
               <div key={dept.id} className={`col dept-${dept.id}`}>
                 <h2>{dept.name}</h2>
-                <ul></ul>
+                <ul>{dept.employees.map(emp => {
+                  return (<li key={emp.id}>{emp.name}
+                  <p> <button>Fire</button>
+                  <button>Remove from Dept</button>
+                  </p>
+                  </li>)
+                })}</ul>
               </div>
             )
           })

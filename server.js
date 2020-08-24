@@ -28,6 +28,20 @@ app.get('/api/departments', async (req, res, next) => {
   res.send(departments);
 })
 
+app.delete('api/employees/:id', async (req, res, next) => {
+  await Friend.destroy({ where: {
+    id: req.params.id
+  }});
+  res.sendStatus(204)
+})
+
+app.put('api/employees/:id', async (req, res, next) => {
+  const emp = await Friend.findOne({where: {
+    id: req.params.id
+  }})
+  await emp.setDepartment(null);
+})
+
 
 PORT = process.env.PORT || 3030;
 
