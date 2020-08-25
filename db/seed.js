@@ -1,6 +1,5 @@
 const { db, Employee, Department } = require('./index.js');
 const faker = require('faker');
-const { noExtendLeft } = require('sequelize/types/lib/operators');
 
 const employeeNames = [];
 const deptNames = [];
