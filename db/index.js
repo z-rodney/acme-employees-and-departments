@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
-const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost/acme-emp-and-depts';
-const db = new Sequelize(DATABASE_URL);
+const dbUrl = process.env.DATABASE_URL || 'postgres://localhost/acme-emp-and-depts';
+const db = new Sequelize(dbUrl);
 const { STRING } = Sequelize;
 
 const Department = db.define('department', {
