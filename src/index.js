@@ -46,7 +46,6 @@ class Main extends React.Component {
   async handleClickEvent(e){
     if (e.target.tagName == 'BUTTON') {
       const path = findPath(e.target.id);
-      //console.log(e);
       e.target.className === 'fire' ? await axios.delete(path) : await axios.put(path);
       const { depts, emps } = await this.loadData();
       this.setState({

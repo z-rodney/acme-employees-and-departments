@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const Sequelize = require('sequelize');
-const pg = require('pg');
+//const Sequelize = require('sequelize');
+//const pg = require('pg');
 const morgan = require('morgan');
 const path = require('path');
 const { db, Employee, Department } = require('./db');
@@ -46,7 +46,7 @@ app.put('/api/employees/:id', async (req, res, next) => {
 PORT = process.env.PORT || 3030;
 
 const init = async () => {
-  db.sync();
+  await db.sync();
   app.listen(PORT);
   console.log(`listening in on ${PORT}`);
 }
