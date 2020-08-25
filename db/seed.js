@@ -1,5 +1,6 @@
 const { db, Employee, Department } = require('./index.js');
 const faker = require('faker');
+const { noExtendLeft } = require('sequelize/types/lib/operators');
 
 const employeeNames = [];
 const deptNames = [];
@@ -24,17 +25,21 @@ for (let i = 0; i < 50; i++) {
 }
 
 const seed = async () => {
-  await db.sync({force: true});
-  await Promise.all([
-    Employee.bulkCreate(employeeNames),
-    Department.bulkCreate(deptNames)
-  ]);
-  const [ emps, depts ] = await Promise.all([
-    Employee.findAll(),
-    Department.findAll()
-  ])
-  await makeAssociations(emps, depts);
-  await db.close();
+  try {
+    await db.sync({force: true});
+    await Promise.all([
+      Employee.bulkCreate(employeeNames),
+      Department.bulkCreate(deptNames)
+    ]);
+    const [ emps, depts ] = await Promise.all([
+      Employee.findAll(),
+      Department.findAll()
+    ])
+    await makeAssociations(emps, depts);
+    await db.close();
+  } catch(err) {
+    console.log('failed to seed', err)
+  }
 }
 
 seed();
