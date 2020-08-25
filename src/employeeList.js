@@ -1,24 +1,21 @@
 import React from 'react'
 
+const FireButton = (props) => {
+  return <button className="fire" id={`fire-/api/employees/${props.id}`}>Fire</button>
+}
+
+const RemoveButton = (props) => {
+  return <button className="remove" id={`remove-/api/employees/${props.id}`}>X Remove from Dept</button>
+}
+
 const EmployeeList = (props) => {
-  if (props.deptId) {
-    return props.people.map(person => {
-      return (<div key={person.id}>
-        <p>{person.name}</p>
-        <button className="fire" id={`fire-/api/employees/${person.id}`}>Fire</button>
-        <button className="remove" id={`remove-/api/employees/${person.id}`}>X Remove from Dept</button>
-      </div>)
-      }
+  return props.people.map(person => {
+    const buttons = props.deptId ? <span> <FireButton id={person.id}/> <RemoveButton id={person.id}/>  </span>: <FireButton id={person.id}/>;
+    return (<div key={person.id}>
+      <p>{person.name}</p>
+      {buttons}
+      </div>)}
     )
-  } else {
-    return props.people.map(person => {
-      return (<div key={person.id}>
-        <p>{person.name}</p>
-        <button className="fire" id={`fire-/api/employees/${person.id}`}>Fire</button>
-      </div>)
-      }
-    )
-  }
 }
 
 export default EmployeeList
