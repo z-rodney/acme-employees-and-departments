@@ -57,9 +57,13 @@ class Main extends React.Component {
 
   render(){
     const { employees, departments } = this.state;
-    return ( <div className='dept-container'>
-       <DepartmentList departments={departments} employees={employees}/>
-    </div>)
+  return ( <div className="body-container">
+      <p>{employees.length} Total Employees</p>
+      <div className='dept-container'>
+        <DepartmentList departments={departments} employees={employees}/>
+      </div>
+    </div>
+    )
   }
 }
 

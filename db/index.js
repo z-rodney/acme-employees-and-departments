@@ -1,9 +1,7 @@
 const Sequelize = require('sequelize');
-const pg = require('pg')
-const dbUrl = process.env.DATABASE_URL
-//|| 'postgres://localhost/acme-emp-and-depts'
+const dbUrl = process.env.DATABASE_URL || 'postgres://localhost/acme-emp-and-depts'
 const db = new Sequelize(dbUrl, {
-  dialect: 'postgres'
+  logging: false
 });
 const { STRING } = Sequelize;
 

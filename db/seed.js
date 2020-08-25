@@ -1,5 +1,3 @@
-const Sequelize = require('sequelize');
-const pg = require('pg');
 const { db, Employee, Department } = require('./index.js');
 const faker = require('faker');
 

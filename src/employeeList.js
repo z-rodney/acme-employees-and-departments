@@ -11,7 +11,7 @@ const RemoveButton = (props) => {
 const EmployeeList = (props) => {
   return props.people.map(person => {
     const buttons = props.deptId ? <span> <FireButton id={person.id}/> <RemoveButton id={person.id}/>  </span>: <FireButton id={person.id}/>;
-    return (<div key={person.id}>
+    return (<div className='emp-col' key={person.id}>
       <p>{person.name}</p>
       {buttons}
       </div>)}

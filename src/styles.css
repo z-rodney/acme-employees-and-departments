@@ -11,6 +11,7 @@ body {
 .col {
   border-right: 1px solid black;
   padding: 1rem;
+  flex: 1;
 }
 
 .col h2 {
@@ -20,6 +21,10 @@ body {
 button {
   border: 1px solid black;
   box-shadow: none;
+}
+
+.dept-heading {
+  height: 6rem;
 }
 
 .fire {

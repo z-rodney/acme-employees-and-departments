@@ -1,7 +1,5 @@
 const express = require('express');
 const app = express();
-const Sequelize = require('sequelize');
-const pg = require('pg');
 const morgan = require('morgan');
 const path = require('path');
 const { db, Employee, Department } = require('./db');
