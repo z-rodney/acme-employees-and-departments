@@ -43,13 +43,13 @@ app.put('/api/employees/:id', async (req, res, next) => {
 })
 
 
-PORT = process.env.PORT || 3030;
+const port = process.env.PORT || 3030;
 
 const init = async () => {
   try {
     await db.sync();
-    app.listen(PORT);
-    console.log(`listening in on ${PORT}`);
+    app.listen(port);
+    console.log(`listening in on ${port}`);
   } catch(err) {
     console.log('failed to connect', err)
   }

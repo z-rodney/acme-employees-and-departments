@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
-const pg = require('pg');
-const dbUrl = process.env.HEROKU_POSTGRESQL_GRAY_URL|| 'postgres://localhost:5432/acme-emp-and-depts';
+const pg = require('pg')
+const dbUrl = process.env.DATABASE_URL || 'postgres://localhost/acme-emp-and-depts'
 const db = new Sequelize(dbUrl);
 const { STRING } = Sequelize;
 
