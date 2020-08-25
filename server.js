@@ -52,7 +52,7 @@ const init = async () => {
     console.log(`listening in on ${PORT}`);
   } catch(err) {
     console.log('failed to connect', err)
-    next(err)}
+  }
 }
 
 init();
