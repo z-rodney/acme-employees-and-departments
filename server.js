@@ -51,7 +51,7 @@ const init = async () => {
     app.listen(port);
     console.log(`listening in on ${port}`);
   } catch(err) {
-    console.log('failed to connect', err)
+    console.log('failed to connect', err, port)
   }
 }
 
