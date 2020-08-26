@@ -1,5 +1,11 @@
 body {
   box-sizing: border-box;
+  background: #2D728F;
+  font-family: 'Roboto', sans-serif;
+}
+
+header {
+  font-family: 'Oxygen', sans-serif;
 }
 
 .dept-container {
@@ -26,11 +32,21 @@ button {
 .dept-heading {
   height: 6rem;
 }
-
+button {
+  border-radius: 8px;
+}
 .fire {
-  background: rgb(168, 2, 2);
+  background: #7a000c
+}
+
+.fire:hover {
+  background: #520008;
 }
 
 .remove {
-  background: gray;
+  background: #9DCBBA;
+}
+
+.remove:hover {
+  background: #6CB298;
 }
