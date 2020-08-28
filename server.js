@@ -15,20 +15,32 @@ app.get('/', (req, res, next) => {
 })
 
 app.get('/api/employees', async (req, res, next) => {
-  const employees = await Employee.findAll();
-  res.send(employees);
+  try {
+    const employees = await Employee.findAll();
+    res.send(employees);
+  } catch(err) {
+    next(err);
+  }
 });
 
 app.get('/api/departments', async (req, res, next) => {
-  const departments = await Department.findAll();
-  res.send(departments);
+  try {
+    const departments = await Department.findAll();
+    res.send(departments);
+  } catch(err) {
+    next(err)
+  }
 })
 
 app.delete('/api/employees/:id', async (req, res, next) => {
-  await Employee.destroy({ where: {
-    id: req.params.id
-  }});
-  res.send('ok')
+  try {
+    await Employee.destroy({ where: {
+      id: req.params.id
+    }});
+    res.sendStatus(200)
+  } catch(err) {
+    next(err)
+  }
 })
 
 app.put('/api/employees/:id', async (req, res, next) => {
@@ -36,8 +48,7 @@ app.put('/api/employees/:id', async (req, res, next) => {
     id: req.params.id
   }})
   await emp.setDepartment(null);
-  const employees = await Employee.findAll();
-  res.send(employees);
+  res.send(emp);
 })
 
 

@@ -3,18 +3,15 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 import DepartmentList from './departmentList'
 
-const findPath = (str) => {
-  return str.split('-')[1]
-}
-
 class Main extends React.Component {
   constructor(){
     super(),
     this.state = {
-      departments: [{id: null}],
+      departments: [],
       employees: []
     },
-    this.handleClickEvent = this.handleClickEvent.bind(this)
+    this.deleteEmployee = this.deleteEmployee.bind(this);
+    this.removeDepartment = this.removeDepartment.bind(this)
   }
 
   async loadData(){
@@ -22,10 +19,8 @@ class Main extends React.Component {
       axios.get('/api/departments'),
       axios.get('/api/employees')
     ]);
-    const [depts, emps] = await Promise.all([
-      deptRes.data,
-      empRes.data
-    ]);
+    const depts = deptRes.data;
+    const emps = empRes.data;
     depts.unshift({id: null})
     return {depts, emps}
   }
@@ -36,31 +31,41 @@ class Main extends React.Component {
       departments: depts,
       employees: emps
     });
-    ReactDOM.findDOMNode(this).addEventListener('click', this.handleClickEvent)
   }
 
-  componentWillUnmount(){
-    ReactDOM.findDOMNode(this).removeEventListener('click', this.handleClickEvent)
-  }
-
-  async handleClickEvent(e){
-    if (e.target.tagName == 'BUTTON') {
-      const path = findPath(e.target.id);
-      e.target.className === 'fire' ? await axios.delete(path) : await axios.put(path);
-      const { depts, emps } = await this.loadData();
+  async deleteEmployee(empId){
+    try {
+      await axios.delete(`/api/employees/${empId}`)
+      const emps = this.state.employees.filter(emp => emp.id !== empId);
       this.setState({
-        departments: depts,
         employees: emps
-      });
-      }
+      })
+    } catch(err) {
+      console.log('unable to delete employee:', err.message)
     }
+  }
+
+  async removeDepartment(emp){
+    try {
+      await axios.put(`/api/employees/${emp.id}`)
+      emp.departmentId = null;
+      const updatedEmps = this.state.employees.map(employee => {
+        return employee.id === emp.id ? emp : employee
+      })
+      this.setState({
+        employees: updatedEmps
+      })
+    } catch(err) {
+      console.log('unable to change department')
+    }
+  }
 
   render(){
     const { employees, departments } = this.state;
-  return ( <div className="body-container">
+    return ( <div className="body-container">
       <p>{employees.length} Total Employees</p>
       <div className='dept-container'>
-        <DepartmentList departments={departments} employees={employees}/>
+        <DepartmentList delete={this.deleteEmployee} remove={this.removeDepartment} departments={departments} employees={employees}/>
       </div>
     </div>
     )
@@ -68,4 +73,3 @@ class Main extends React.Component {
 }
 
 ReactDOM.render(<Main/>, document.querySelector('#root'));
-

@@ -9,8 +9,9 @@ const randomNum = () => {
 }
 
 const makeAssociations = async (empArray, deptArray) => {
-  for (const emp of empArray) {
-    let currDept = deptArray.find(dept => dept.id === randomNum());
+  for (let emp of empArray) {
+    let num = randomNum();
+    let currDept = deptArray.find(dept => dept.dataValues.id === num);
     await emp.setDepartment(currDept);
   }
 }
@@ -34,6 +35,7 @@ const seed = async () => {
       Employee.findAll(),
       Department.findAll()
     ])
+    console.log(depts)
     await makeAssociations(emps, depts);
     await db.close();
   } catch(err) {

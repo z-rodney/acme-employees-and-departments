@@ -8,7 +8,7 @@ const DepartmentList = (props) => {
       <div className='dept-heading'>
         <h2>{`${dept.name || 'Employees Without Departments'} (${myEmps.length})`}</h2>
       </div>
-      <EmployeeList deptId={dept.id} people={myEmps}/>
+      <EmployeeList delete={props.delete} remove={props.remove} deptId={dept.id} people={myEmps}/>
     </div>
     )
   })
